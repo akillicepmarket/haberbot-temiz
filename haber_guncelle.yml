@@ -2,8 +2,8 @@ name: Haberleri Güncelle
 
 on:
   schedule:
-    - cron: "0 */6 * * *"  # Her 6 saatte bir çalışacak
-  workflow_dispatch:
+    - cron: "0 */6 * * *"  # Her 6 saatte bir çalışacak (6 saatte bir otomatik)
+  workflow_dispatch:       # İstersen elle çalıştırma seçeneği
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Paketleri yükle
+    - name: Kütüphaneleri yükle
       run: |
         pip install feedparser
 
@@ -26,7 +26,7 @@ jobs:
       run: |
         python haber_cek.py
 
-    - name: Güncellenen dosyayı GitHub'a kaydet
+    - name: Değişiklikleri kaydet ve gönder
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
